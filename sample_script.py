@@ -31,3 +31,5 @@ assert 'mail' in driver.current_url.lower(), f"Expected query not in {driver.cur
 print('Test Passed')
 
 driver.quit()
+
+#Test passed by Ilya
