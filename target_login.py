@@ -37,5 +37,3 @@ print(f'The text {text} shown in the page ')
 print("Test case - type your username - passed")
 print('Locators are built correctly and point to the correct webelements')
 print('Test case runs and works correctly')
-#Need to find the  Sign into your Target account
-#and login #
