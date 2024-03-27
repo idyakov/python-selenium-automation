@@ -13,17 +13,19 @@ driver = webdriver.Chrome(service=service)
 driver.maximize_window()
 
 # open the url
-driver.get('https://www.target.com/')
+driver.get('https://www.amazon.com/ap/signin?openid.pape.max_auth_age=0&openid.return_to=https%3A%2F%2Fwww.amazon.com%2Fgp%2Fcss%2Fhomepage.html%2Fref%3Dnav_signin&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0')
 
-# Enter 'coffee' in search field
-driver.find_element(By.ID, 'search').send_keys('coffee')
-# Click search btn
-driver.find_element(By.XPATH, "//button[@data-test='@web/Search/SearchButton']").click()
 
-sleep(6)
+#Enter whisky in the search field
+#driver.find_element(By.ID, 'ap-credential-autofill-hint').send_keys('whisky')
+#Click search btn
+driver.find_element(By.XPATH, "//input[@type='email']")
+sleep(10)
+"//input[@type='email']"
+$x("//input[@type='email']")
 
-# Verification
-actual_text = driver.find_element(By.XPATH, "//div[@data-test='resultsHeading']").text
-assert 'coffee' in actual_text, f'Error! Text coffee not in {actual_text}'
-
-driver.quit()
+$x("//input[@id='ap_email']")
+$x("//input[@name='email']")
+$x("//input[@name='password']")
+$x("//input[@id='continue']")
+$x("//input[@class='a-button-input']")
