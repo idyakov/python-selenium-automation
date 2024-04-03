@@ -1,4 +1,4 @@
-from selenium import webdriver
+homework_2_step_cases.pyfrom selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
