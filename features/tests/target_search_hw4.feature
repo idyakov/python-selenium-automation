@@ -16,3 +16,4 @@ Feature: Target Circle main page verification for the benefits
     When Verify UI elements
 
 #
+#
