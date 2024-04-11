@@ -22,9 +22,9 @@ def verify_cart_is_empty(context):
     print("the verification of the element in the code has been successful.")
     sleep(3)
 
-@given('Open Target main page for signin functionality')
-def open_target_main_page(context):
-    context.driver.get('https://www.target.com/')
+# @given('Open Target main page')
+# def open_target_main_page(context):
+#     context.driver.get('https://www.target.com/')
 
 @when("Target Signin button pressed")
 def target_signin_button_pressed(context):

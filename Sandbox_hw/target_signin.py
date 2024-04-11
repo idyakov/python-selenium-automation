@@ -19,10 +19,7 @@ driver.find_element(By.XPATH, "//*[@data-test='accountNav-signIn']").click()
 expected = 'Sign into your Target account'
 actual = driver.find_element(By.XPATH, "//h1[contains(@class, 'StyledHeading')]").text
 assert expected == actual, f'Expected {expected} did not match actual {actual}'
+# driver.find_element(By.XPATH, "//span[text()='Sign into your Target account']")
+
 # Make sure login button is shown
-
-print(f'The text "{actual}" shown in the page')
-
-
-sleep(1)
-driver.quit()
+driver.find_element(By.ID, 'login')

@@ -6,7 +6,7 @@ Feature: Test Scenarios for Search Target pages functionality
     Then Verify the cart is empty shown
 
   Scenario: Developer checking the expected SignIn functionality on the Target pages
-    Given Open Target main page for signin functionality
+    Given Open Target main page
     When Target Signin button pressed
     Then Verify Sign In form opened
 
