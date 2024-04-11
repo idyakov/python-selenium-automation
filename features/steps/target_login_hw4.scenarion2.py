@@ -25,3 +25,4 @@ def target_button_pressed(context):
     text1 = context.driver.find_element(By.CSS_SELECTOR, "div[class='styles__StyledHeading-sc-1ge2jts-1 bmsjWz']").text
     print(f'The price is {text1} including the taxes and the shipping')
     sleep(10)
+#
