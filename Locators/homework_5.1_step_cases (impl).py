@@ -17,9 +17,15 @@ CART_ICON = (By.CSS_SELECTOR, "[data-test='@web/CartLink']")
 HEADER = (By.CSS_SELECTOR, "[class*='UtilityHeaderWrapper']")
 HEADER_LINKS = (By.CSS_SELECTOR, "a[id*='utilityNav']")
 ADD_TO_CART_BTN = (By.CSS_SELECTOR, "[id*='addToCartButtonOrTextIdFor15280655']")
+xpath = "//div[@class='styles__ThreeUpButtonWrapper-sc-11rka0i-0 gfFifD']//button[text()='Add to cart']"
+ADD_TO_CART_BTN_POPUP = (By.XPATH, xpath)
+loupe_xpath = "//button[@type='submit']"
+PRESS_LOUPE = (By.XPATH, loupe_xpath)
+WEB_LINK = "https://www.target.com/cart"
 SIDE_NAV_PRODUCT_NAME = (By.CSS_SELECTOR, "h4[class*='StyledHeading']")
 SIDE_NAV_ADD_TO_CART_BTN = (By.CSS_SELECTOR, "[data-test='orderPickupButton']")
 CROSS_CLOSE_POPUP = (By.XPATH, "//button[contains(@class, 'styles__StyledButton-sc-18jd2v4')]")
+DISCOUNT_LIST = (By.XPATH,'//div[@data-component-id="WEB-397697"] //a[@data-test="@web/slingshot-components/CellsComponent/Link"]')
 
 # create a new Chrome browser instance
 service = Service(driver_path)
@@ -38,30 +44,20 @@ deals = driver.find_elements(By.XPATH,'//div[@data-component-id="WEB-397697"] //
 numbers = int(len(deals))
 assert expected == numbers
 print(f'Expected deals {expected}, got {numbers}. Gongrats! ')
-# sleep(3)
-
 
 #Scenarion_2
-driver.get('https://www.target.com/')
-
+driver.get(WEB_LINK)
 driver.find_element(By.ID, 'search').send_keys('car')  # item search
-
-driver.find_element(By.XPATH, "//button[@type='submit']").click()  # Press the loop
+wait.until(EC.element_to_be_clickable(PRESS_LOUPE)).click()  # Press the loop
 sleep(5) # I left sleep function here, because without it, it's failed, even if I do implicit wait. I think the Target has this issue.
 wait.until(EC.element_to_be_clickable(ADD_TO_CART_BTN)).click()  # press the button add to cart
-sleep(8) # Same, I left sleep function here, because without it, it's failed, even if I do implicit wait. I think the Target has this issue.
-driver.find_element(By.XPATH, "//div[@class='styles__ThreeUpButtonWrapper-sc-11rka0i-0 gfFifD']//button[text()='Add to cart']").click()
-sleep(8)
+wait.until(EC.element_to_be_clickable(ADD_TO_CART_BTN_POPUP)).click()
 driver.get('https://www.target.com/cart')
-sleep(5)
 text1 = driver.find_element(By.CSS_SELECTOR, "div[class='styles__StyledHeading-sc-1ge2jts-1 bmsjWz']").text
 print(f'The price is {text1} including the taxes and the shipping')
-#sleep(7)
-
 
 #Scenarion_3
 driver.get('https://help.target.com/help')
-
 driver.find_element(By.CSS_SELECTOR, "h2[class='custom-h2']") #Test Target help header
 driver.find_element(By.ID, 'j_id0:j_id2:j_id32:name') #Test Target search panel
 driver.find_element(By.CSS_SELECTOR, "input[class='btn-sm search-btn']") #Test Target search loop icon
@@ -70,4 +66,3 @@ driver.find_element(By.CSS_SELECTOR, "div[class='salesforceBox txtAC bigbox1']")
 driver.find_element(By.CSS_SELECTOR, "div[class='grid_4 boxSmallr txtAC bigbox2']") #Test Target Contact us
 driver.find_element(By.XPATH, "//h2[text()='Browse all Help pages']") #Test Target Browse all help pages
 print("All buttons of the Target pages - passed, within Implicit wait option")
-sleep(5)
