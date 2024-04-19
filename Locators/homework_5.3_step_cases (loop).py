@@ -26,7 +26,7 @@ SIDE_NAV_PRODUCT_NAME = (By.CSS_SELECTOR, "h4[class*='StyledHeading']")
 SIDE_NAV_ADD_TO_CART_BTN = (By.CSS_SELECTOR, "[data-test='orderPickupButton']")
 CROSS_CLOSE_POPUP = (By.XPATH, "//button[contains(@class, 'styles__StyledButton-sc-18jd2v4')]")
 DISCOUNT_LIST = (By.XPATH,'//div[@data-component-id="WEB-397697"] //a[@data-test="@web/slingshot-components/CellsComponent/Link"]')
-COLOR_OPTIONS = (By.CSS_SELECTOR, "[class*='styles__ButtonWrapper'] img")
+COLOR_OPTIONS = (By.CSS_SELECTOR, "div[class*='styles__ButtonWrapper-sc'] img")
 SELECTED_COLOR = (By.CSS_SELECTOR, "[class*='StyledVariationSelectorImage'] [class*='StyledHeaderWrapper']")
 
 
@@ -45,14 +45,20 @@ driver.get(WEB_LINK)
 
 expected_color = ['dark khaki', 'black/gum', 'stone/grey', 'white/gum']
 actual_color = []
-colors = driver.find_element(COLOR_OPTIONS)
+colors = driver.find_elements(By.CSS_SELECTOR, "div[class*='styles__ButtonWrapper-sc'] img")
 for color in colors:
     color.click()
+    WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located(
+            SELECTED_COLOR
+    ))
+    # Retrieve the text of the selected color and process it
+    selected_color = driver.find_element(By.CSS_SELECTOR, "[class*='StyledVariationSelectorImage'] [class*='StyledHeaderWrapper']").text
+    print('Current ', selected_color)
+    processed_color = selected_color.split('\n')[1]  # Assume the second line is the color text
+    actual_color.append(processed_color.strip())  # Strip to clean up any extra whitespace
 
-    selected_color = driver.find_element(SELECTED_COLOR).text #a color\blabla
-    selected_color = selected_color.split('\n')[1] #remove the word color
-    actual_color.append(selected_color)
 
 assert expected_color == actual_color, f'Expected {expected_color}, got {actual_color}'
 
-
+print('The test case works correctly')
