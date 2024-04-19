@@ -21,11 +21,14 @@ xpath = "//div[@class='styles__ThreeUpButtonWrapper-sc-11rka0i-0 gfFifD']//butto
 ADD_TO_CART_BTN_POPUP = (By.XPATH, xpath)
 loupe_xpath = "//button[@type='submit']"
 PRESS_LOUPE = (By.XPATH, loupe_xpath)
-WEB_LINK = "https://www.target.com/cart"
+WEB_LINK = "https://www.target.com/p/A-91511634?preselect=91511683"
 SIDE_NAV_PRODUCT_NAME = (By.CSS_SELECTOR, "h4[class*='StyledHeading']")
 SIDE_NAV_ADD_TO_CART_BTN = (By.CSS_SELECTOR, "[data-test='orderPickupButton']")
 CROSS_CLOSE_POPUP = (By.XPATH, "//button[contains(@class, 'styles__StyledButton-sc-18jd2v4')]")
 DISCOUNT_LIST = (By.XPATH,'//div[@data-component-id="WEB-397697"] //a[@data-test="@web/slingshot-components/CellsComponent/Link"]')
+COLOR_OPTIONS = (By.CSS_SELECTOR, "[class*='styles__ButtonWrapper'] img")
+SELECTED_COLOR = (By.CSS_SELECTOR, "[class*='StyledVariationSelectorImage'] [class*='StyledHeaderWrapper']")
+
 
 # create a new Chrome browser instance
 service = Service(driver_path)
@@ -36,23 +39,20 @@ driver.implicitly_wait(4) #up to 4 sec
 # explicit
 wait = WebDriverWait(driver, 10)  # Example: 10 seconds timeout
 #driver.wait = WebDriverWait(driver, timeout=10)
-driver.get('https://www.target.com/l/target-circle/-/N-pzno9')
 
 #Scenarion_1
-expected = 6
-deals = driver.find_elements(By.XPATH,'//div[@data-component-id="WEB-397697"] //a[@data-test="@web/slingshot-components/CellsComponent/Link"]')
-numbers = int(len(deals))
-assert expected == numbers
-print(f'Expected deals {expected}, got {numbers}. Gongrats! ')
-
-#Scenarion_2
 driver.get(WEB_LINK)
-driver.find_element(By.ID, 'search').send_keys('car')  # item search
-wait.until(EC.element_to_be_clickable(PRESS_LOUPE)).click()  # Press the loop
-sleep(5) # I left sleep function here, because without it, it's failed, even if I do implicit wait. I think the Target has this issue.
-wait.until(EC.element_to_be_clickable(ADD_TO_CART_BTN)).click()  # press the button add to cart
-wait.until(EC.element_to_be_clickable(ADD_TO_CART_BTN_POPUP)).click()
-driver.get('https://www.target.com/cart')
-text1 = driver.find_element(By.CSS_SELECTOR, "div[class='styles__StyledHeading-sc-1ge2jts-1 bmsjWz']").text
-print(f'The price is {text1} including the taxes and the shipping')
+
+expected_color = ['dark khaki', 'black/gum', 'stone/grey', 'white/gum']
+actual_color = []
+colors = driver.find_element(COLOR_OPTIONS)
+for color in colors:
+    color.click()
+
+    selected_color = driver.find_element(SELECTED_COLOR).text #a color\blabla
+    selected_color = selected_color.split('\n')[1] #remove the word color
+    actual_color.append(selected_color)
+
+assert expected_color == actual_color, f'Expected {expected_color}, got {actual_color}'
+
 
