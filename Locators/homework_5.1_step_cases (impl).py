@@ -66,3 +66,5 @@ driver.find_element(By.CSS_SELECTOR, "div[class='salesforceBox txtAC bigbox1']")
 driver.find_element(By.CSS_SELECTOR, "div[class='grid_4 boxSmallr txtAC bigbox2']") #Test Target Contact us
 driver.find_element(By.XPATH, "//h2[text()='Browse all Help pages']") #Test Target Browse all help pages
 print("All buttons of the Target pages - passed, within Implicit wait option")
+
+#hw5

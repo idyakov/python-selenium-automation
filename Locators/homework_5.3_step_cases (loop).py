@@ -62,3 +62,4 @@ for color in colors:
 assert expected_color == actual_color, f'Expected {expected_color}, got {actual_color}'
 
 print('The test case works correctly')
+#hw5

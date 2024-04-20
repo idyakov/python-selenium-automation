@@ -45,3 +45,5 @@ text3 = driver.find_element(By.XPATH, "//a[contains(text(), 'Pukka Selection Box
 image3 = driver.find_element(By.XPATH, "//picture/img[@src='https://target.scene7.com/is/image/Target/GUEST_e6b25cf3-7b1c-4704-92cb-57772dae43b5?qlt=65&fmt=webp&hei=350&wid=350']")
 print(f'the icon 3 with text - {text3} has the image')
 print('passed')
+
+#hw5
